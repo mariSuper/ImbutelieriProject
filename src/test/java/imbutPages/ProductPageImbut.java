@@ -27,8 +27,9 @@ public class ProductPageImbut {
         categoriiElement.click();
 
         // Click pe submeniul 'Borcane'
-        WebElement borcaneElement = driver.findElement(
-                By.xpath("//a[contains(@class,'a-top-link a-item')]//span[contains(text(),'Borcane')]"));
+        WebElement borcaneElement = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//a[contains(@class,'a-top-link a-item')]//span[contains(text(),'Borcane')]")));
         borcaneElement.click();
 
         // Click pe produsul 'Borcan Amfora'
