@@ -94,6 +94,6 @@ public class ProductFlowTest {
         System.out.println("Flow-ul de test al produsului s-a incheiat cu succes");
 
         //închide sesiunea
-         driver.quit();
+//         driver.quit();
     }
 }

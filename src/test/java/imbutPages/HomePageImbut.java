@@ -1,30 +1,44 @@
 package imbutPages;
 
-import org.openqa.selenium.By;
+import methodsImbutelieri.ElementsMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePageImbut {
-    public WebDriver driver;
+    private WebDriver driver;
+    private ElementsMethod elementsMethod;
 
-    //Homepage
-    @Test
-    public void Imbutelieri() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.imbutelieri.ro/");
+    public HomePageImbut(WebDriver driver) {
+        this.driver = driver;
+        this.elementsMethod = new ElementsMethod(driver);
+        PageFactory.initElements(driver, this);
+    }
 
-        // click pe butonul 'Contact'
-        WebElement contactElement = driver.findElement(
-                By.xpath("//a[@class='a-top-link']//span[contains(text(),'Contact')]"));
-        contactElement.click();
+    // Elemente
+    // Buton 'Contact'
+    @FindBy(xpath = "//a[@class='a-top-link']//span[contains(text(),'Contact')]")
+    private WebElement contactElement;
 
-        // click inapoi pe butonul 'ACASA'
-        WebElement acasaElement = driver.findElement(
-                By.xpath("//a[@class='a-top-link']//span[contains(text(),'Acasa')]"));
-        acasaElement.click();
+    // Buton 'Acasa'
+    @FindBy(xpath = "//a[@class='a-top-link']//span[contains(text(),'Acasa')]")
+    private WebElement acasaElement;
+
+    // Acțiuni
+    // Click pe buton 'Contact'
+    public void clickContacte() {
+        elementsMethod.clickElement(contactElement);
+    }
+
+    // Click pe buton 'Acasa'
+    public void clickAcasa() {
+        elementsMethod.clickElement(acasaElement);
     }
 }
+
+
+
+
+
 

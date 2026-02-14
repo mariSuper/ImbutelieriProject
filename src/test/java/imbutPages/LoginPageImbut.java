@@ -1,60 +1,58 @@
 package imbutPages;
 
-import org.openqa.selenium.By;
+import methodsImbutelieri.ElementsMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
-
-import java.time.Duration;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPageImbut {
+    private WebDriver driver;
+    private ElementsMethod elementsMethod;
 
-    WebDriver driver;
+    public LoginPageImbut(WebDriver driver) {
+        this.driver = driver;
+        this.elementsMethod = new ElementsMethod(driver);
+        PageFactory.initElements(driver, this);
+    }
 
-    @Test
-    public void loginPageImbut() {
+    // Elemente
+    // Butonul 'Contul meu'
+    @FindBy(xpath = "//span[text()='Contul meu']")
+    private WebElement loginButtonElement;
 
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.imbutelieri.ro/");
+    // Field-ul 'email'
+    @FindBy(id = "input-email")
+    private WebElement emailElement;
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        Actions actions = new Actions(driver);
+    // Field-ul 'password'
+    @FindBy(id = "input-password")
+    private WebElement passwordElement;
 
-        // Cookies
-        try {
-            WebElement acceptCookies = wait.until(
-                    ExpectedConditions.elementToBeClickable(
-                            By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")));
-            acceptCookies.click();
-        } catch (Exception e) {
-            System.out.println("Cookie banner not present");
-        }
+    // Butonul de 'Autentificare'
+    @FindBy(xpath = "//input[@value='Autentificare']")
+    private WebElement submitButtonElement;
 
-        // Click pe "Contul meu"
-        WebElement loginButtonElement = wait.until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//span[text()='Contul meu']")));
-        loginButtonElement.click();
+    // Actiuni
+    // Click pe butonul 'Contul meu'
+    public void clickLoginIcon() {elementsMethod.clickElement(loginButtonElement);
+    }
+    // Completez field-ul 'email'
+    public void enterEmail(String email) {elementsMethod.fillElement(emailElement, email);
+    }
+    // Completez field-ul 'password'
+    public void enterPassword(String password) {elementsMethod.fillElement(passwordElement, password);
+    }
+    // Click pe butonul de 'Autentificare'
+    public void clickSubmit() {
+        elementsMethod.clickElement(submitButtonElement);
+    }
 
-        // Email
-        WebElement emailElement = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("input-email")));
-        emailElement.sendKeys("gabimari2022art@gmail.com");
-
-        // Parola
-        WebElement passwordElement = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("input-password")));
-        passwordElement.sendKeys("Indexare1!");
-
-        // Autentificare
-        WebElement submitButton = wait.until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//input[@value='Autentificare']")));
-        submitButton.click();
+    // Actiune compusa (FLOW)
+    public void login(String email, String password) {
+        clickLoginIcon();
+        enterEmail(email);
+        enterPassword(password);
+        clickSubmit();
     }
 }

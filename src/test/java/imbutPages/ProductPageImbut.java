@@ -1,92 +1,84 @@
 package imbutPages;
 
-import org.openqa.selenium.By;
+import methodsImbutelieri.ElementsMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
-
-import java.time.Duration;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class ProductPageImbut {
     public WebDriver driver;
+    private ElementsMethod elementsMethod;
 
-    @Test
-    public void imbutelieriProductsTest() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.imbutelieri.ro/");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
-        // Click pe meniul 'CATEGORII'
-        WebElement categoriiElement = driver.findElement(
-                By.xpath("//div[contains(@class,'left')]//span[contains(text(),'Categorii')]"));
-        categoriiElement.click();
-
-        // Click pe submeniul 'Borcane'
-        WebElement borcaneElement = wait.until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//a[contains(@class,'a-top-link a-item')]//span[contains(text(),'Borcane')]")));
-        borcaneElement.click();
-
-        // Click pe produsul 'Borcan Amfora'
-        WebElement amforaElement = driver.findElement(
-                By.xpath("//a[normalize-space()='Borcan 106 ml Amfora']"));
-        amforaElement.click();
-
-        // Completare in field 'Cantitate'
-        WebElement cantitateElement = driver.findElement(By.id("input-quantity"));
-        cantitateElement.click();
-        cantitateElement.clear();
-        cantitateElement.sendKeys("2");
-
-        // Click Buton '+adauga in cos'
-        WebElement addCosElement = driver.findElement(By.id("button-cart"));
-        addCosElement.click();
-
-        // Apelez metoda pt popup
-        closeLoginModalIfPresent();
-
-        // Inchidere mesaj de 'succes' daca apare
-        try {
-            WebElement closeSuccessMessage = wait.until(
-                    ExpectedConditions.elementToBeClickable(
-                            By.cssSelector(".alert-success .close")));
-            closeSuccessMessage.click();
-            System.out.println("Success message closed");
-        } catch (Exception e) {
-            System.out.println("Success message not present");
-        }
-
-        // Verific 'cos'
-        WebElement iconCosElement = driver.findElement(By.id("cart"));
-        iconCosElement.click();
-
-        // Apelez metoda pt popup
-        closeLoginModalIfPresent();
-
-        // Click buton 'X' (Eliminare produs)
-        WebElement buttonDeleteElement = driver.findElement(By.className("icon-delete"));
-        buttonDeleteElement.click();
+    public ProductPageImbut(WebDriver driver) {
+        this.driver = driver;
+        this.elementsMethod = new ElementsMethod(driver);
+        PageFactory.initElements(driver, this);
     }
 
-        // Metoda inchidere pop-up de login
-        public void closeLoginModalIfPresent() {
-          try {
-            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(2));
-            WebElement loginModal = shortWait.until(
-                    ExpectedConditions.visibilityOfElementLocated(
-                            By.id("loginModal")));
-            System.out.println("Login modal detected");
-            WebElement closeBtn = driver.findElement(
-                    By.cssSelector("#loginModal .close"));
-            closeBtn.click();
-            System.out.println("Login modal closed");
-              } catch (Exception e) {
-          }
-        }
+    // Elemente
+    // Meniul 'CATEGORII'
+    @FindBy(xpath = "//div[contains(@class,'left')]//span[contains(text(),'Categorii')]")
+    private WebElement categoriiElement;
+
+    // Submeniul 'Borcane'
+    @FindBy(xpath = "//a[contains(@class,'a-top-link a-item')]//span[contains(text(),'Borcane')]")
+    private WebElement borcaneElement;
+
+    // Produsul 'Borcan Amfora'
+    @FindBy(xpath = "//a[normalize-space()='Borcan 106 ml Amfora']")
+    private WebElement amforaElement;
+
+    // Field 'Cantitate'
+    @FindBy(id = "input-quantity")
+    private WebElement cantitateElement;
+
+    // Buton '+adauga in cos'
+    @FindBy(id = "button-cart")
+    private WebElement addCosElement;
+
+    // Verificare 'cos'
+    @FindBy(id = "cart")
+    private WebElement iconCosElement;
+
+    // Stergere produs din Cos
+    @FindBy(id = "icon-delete")
+    private WebElement buttonDeleteElement;
+
+    // Actiuni
+    // Click pe meniul 'CATEGORII'
+    public void clickCategoriiElement() {elementsMethod.clickElement(categoriiElement);
     }
+
+    // Click pe submeniul 'Borcane'
+    public void clickBorcaneElement() {elementsMethod.clickElement(borcaneElement);
+    }
+
+    // Click pe produsul 'Borcan Amfora'
+    public void clickAmforaElement() {elementsMethod.clickElement(amforaElement);
+    }
+
+    // Completare in field 'Cantitate'
+    public void setQuantityElement() {elementsMethod.fillElement(cantitateElement, "2");
+    }
+
+    // Click pe Buton '+adauga in cos'
+    public void clickAddToCartElement() {elementsMethod.clickElement(addCosElement);
+    }
+
+    // Verific 'cos'
+    public void openCartElement() {elementsMethod.clickElement(iconCosElement);
+    }
+
+    // Sterg produsul din Cos
+    public void deleteProductElement() {elementsMethod.clickElement(buttonDeleteElement);
+    }
+}
+
+
+
+
+
+
+
 
