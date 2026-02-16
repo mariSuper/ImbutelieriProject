@@ -7,11 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import imbutModels.ProductModel;
+import imbutUtils.JsonUtils;
 
 public class ProductFlowTest extends Hooks {
 
     @Test
     public void addProductToCartFlow() {
+        ProductModel product = JsonUtils.getTestData().getProductData();
         acceptCookiesIfPresent();
 
         // Click pe Menu 'Categorii'
@@ -32,11 +35,10 @@ public class ProductFlowTest extends Hooks {
         WebElement quantityElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.id("input-quantity")));
         quantityElement.clear();
-        quantityElement.sendKeys("2");
+        quantityElement.sendKeys(product.getQuantity());
 
         // Validare 'cantitate'
-        String value = quantityElement.getAttribute("value");
-        Assert.assertEquals(value, "2", "Cantitatea NU a fost introdusa corect");
+        Assert.assertEquals(quantityElement.getAttribute("value"), product.getQuantity(), "Cantitatea NU a fost introdusa corect");
 
         // Click pe Buton '+adaugă în coș'
         WebElement addToCartButton = wait.until(ExpectedConditions.elementToBeClickable(
@@ -55,7 +57,7 @@ public class ProductFlowTest extends Hooks {
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.id("cart-total"))).getText().contains("1"), "Produsul NU a fost adaugat in cos");
 
-        // Click pentru 'verificare continut Coș'
+        // Click pentru butonul'verificare continut Coș'
         WebElement cartElement = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#cart button")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", cartElement);
 

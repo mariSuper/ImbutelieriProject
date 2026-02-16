@@ -1,5 +1,6 @@
 package imbutHooks;
 
+import imbutUtils.LoggerUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,15 +15,20 @@ import java.time.Duration;
 public class Hooks {
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected String testName;
 
     @BeforeMethod
     public void setup(){
+        testName = this.getClass().getSimpleName();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         // Homepage
         driver.get("https://www.imbutelieri.ro/");
+
+        // Logger pornire test automat
+        LoggerUtil.startTest(testName);
     }
     // Metodă helper
     protected void acceptCookiesIfPresent(){
@@ -38,6 +44,9 @@ public class Hooks {
 
     @AfterMethod
     public void teardown(){
-//        driver.quit();
+        driver.quit();
+
+        // Logger oprire test automat
+        LoggerUtil.endTest(testName);
     }
 }
