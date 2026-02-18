@@ -6,12 +6,7 @@ on:
       suiteName:
         description: "Please specify suite: SmokeSuite, LoginSuite, ProductSuite, RegressionSuite"
         required: true
-        type: choice
-        options:
-          - SmokeSuite
-          - RegressionSuite
-          - LoginSuite
-          - ProductSuite
+        default: "SmokeSuite"
 
 jobs:
   build:
@@ -26,6 +21,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+            
+            # INSTALARE CHROME (CRITIC)
+                   - name: Setup Chrome
+                   uses: browser-actions/setup-chrome@v1
 
       - name: Run automation tests
         run: mvn clean install -Dgroups=${{github.event.inputs.suiteName}}
