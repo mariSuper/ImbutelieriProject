@@ -1,5 +1,6 @@
 package imbutPages;
 
+import imbutUtils.LoggerUtil;
 import methodsImbutelieri.ElementsMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPageImbut {
     private WebDriver driver;
     private ElementsMethod elementsMethod;
+
 
     public LoginPageImbut(WebDriver driver) {
         this.driver = driver;
@@ -35,21 +37,25 @@ public class LoginPageImbut {
 
     // Actiuni
     // Click pe butonul 'Contul meu'
-    public void clickLoginIcon() {elementsMethod.clickElement(loginButtonElement);
+    public void clickLoginIcon() {LoggerUtil.infoLog("Click on Contul Meu button");
+        elementsMethod.clickElement(loginButtonElement);
     }
+
     // Completez field-ul 'email'
-    public void enterEmail(String email) {elementsMethod.fillElement(emailElement, email);
+    public void enterEmail(String email) {LoggerUtil.infoLog("Typing email field");
+        elementsMethod.fillElement(emailElement, email);
     }
     // Completez field-ul 'password'
-    public void enterPassword(String password) {elementsMethod.fillElement(passwordElement, password);
+    public void enterPassword(String password) {LoggerUtil.infoLog("Typing password field");
+        elementsMethod.fillElement(passwordElement, password);
     }
     // Click pe butonul de 'Autentificare'
-    public void clickSubmit() {
+    public void clickSubmit() {LoggerUtil.infoLog("Click on Autentificare button");
         elementsMethod.clickElement(submitButtonElement);
     }
 
-    // Actiune compusa (FLOW)
-    public void login(String email, String password) {
+    // Actiune compusa (Autentificare)
+    public void login(String email, String password) {LoggerUtil.infoLog("Login action");
         clickLoginIcon();
         enterEmail(email);
         enterPassword(password);

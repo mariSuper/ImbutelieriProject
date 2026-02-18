@@ -21,11 +21,11 @@ public class Hooks {
     public void setup(){
         testName = this.getClass().getSimpleName();
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
+        driver.manage().deleteAllCookies();
         // Homepage
         driver.get("https://www.imbutelieri.ro/");
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         // Logger pornire test automat
         LoggerUtil.startTest(testName);

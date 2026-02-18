@@ -1,5 +1,6 @@
 package imbutPages;
 
+import imbutUtils.LoggerUtil;
 import methodsImbutelieri.ElementsMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,15 +28,19 @@ public class HomePageImbut {
 
     // Acțiuni
     // Click pe buton 'Contact'
-    public void clickContacte() {
+    public void clickContact() {
+        LoggerUtil.infoLog("Click on Contact button");
         elementsMethod.clickElement(contactElement);
     }
 
     // Click pe buton 'Acasa'
     public void clickAcasa() {
+        LoggerUtil.infoLog("Click on Acasa button");
         elementsMethod.clickElement(acasaElement);
     }
 }
+
+
 
 
 

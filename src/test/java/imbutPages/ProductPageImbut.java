@@ -1,5 +1,6 @@
 package imbutPages;
 
+import imbutUtils.LoggerUtil;
 import methodsImbutelieri.ElementsMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,31 +48,39 @@ public class ProductPageImbut {
 
     // Actiuni
     // Click pe meniul 'CATEGORII'
-    public void clickCategoriiElement() {elementsMethod.clickElement(categoriiElement);
+    public void clickCategoriiElement() {
+        LoggerUtil.infoLog("Opening Categories menu");
+        elementsMethod.clickElement(categoriiElement);
     }
 
     // Click pe submeniul 'Borcane'
-    public void clickBorcaneElement() {elementsMethod.clickElement(borcaneElement);
+    public void clickBorcaneElement() {LoggerUtil.infoLog("Selecting Borcane submenu");
+        elementsMethod.clickElement(borcaneElement);
     }
 
     // Click pe produsul 'Borcan Amfora'
-    public void clickAmforaElement() {elementsMethod.clickElement(amforaElement);
+    public void clickAmforaElement() {LoggerUtil.infoLog("Opening product page");
+        elementsMethod.clickElement(amforaElement);
     }
 
     // Completare in field 'Cantitate'
-    public void setQuantityElement() {elementsMethod.fillElement(cantitateElement, "2");
+    public void setQuantityElement() {LoggerUtil.infoLog("Updating quantity");
+        elementsMethod.fillElement(cantitateElement, "2");
     }
 
     // Click pe Buton '+adauga in cos'
-    public void clickAddToCartElement() {elementsMethod.clickElement(addCosElement);
+    public void clickAddToCartElement() {LoggerUtil.infoLog("Adding product to cart");
+        elementsMethod.clickElement(addCosElement);
     }
 
     // Verific 'cos'
-    public void openCartElement() {elementsMethod.clickElement(iconCosElement);
+    public void openCartElement() {LoggerUtil.infoLog("Checking products in cart");
+        elementsMethod.clickElement(iconCosElement);
     }
 
     // Sterg produsul din Cos
-    public void deleteProductElement() {elementsMethod.clickElement(buttonDeleteElement);
+    public void deleteProductElement() {LoggerUtil.infoLog("Removing product from cart");
+        elementsMethod.clickElement(buttonDeleteElement);
     }
 }
 

@@ -1,6 +1,7 @@
 package imbutelieriTests;
 
 import imbutHooks.Hooks;
+import imbutUtils.LoggerUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,7 @@ import imbutUtils.JsonUtils;
 
 public class ProductFlowTest extends Hooks {
 
-    @Test
+    @Test(groups = {SuiteType.SMOKE, SuiteType.PRODUCT})
     public void addProductToCartFlow() {
         ProductModel product = JsonUtils.getTestData().getProductData();
         acceptCookiesIfPresent();
@@ -38,7 +39,9 @@ public class ProductFlowTest extends Hooks {
         quantityElement.sendKeys(product.getQuantity());
 
         // Validare 'cantitate'
-        Assert.assertEquals(quantityElement.getAttribute("value"), product.getQuantity(), "Cantitatea NU a fost introdusa corect");
+        LoggerUtil.infoLog("Validating quantity");
+        Assert.assertEquals(quantityElement.getAttribute("value"), product.getQuantity(),
+                "Cantitatea NU a fost introdusa corect");
 
         // Click pe Buton '+adaugă în coș'
         WebElement addToCartButton = wait.until(ExpectedConditions.elementToBeClickable(
@@ -62,6 +65,7 @@ public class ProductFlowTest extends Hooks {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", cartElement);
 
         // Validare produs 'prezent' în coș
+        LoggerUtil.infoLog("Validating cart content");
         WebElement productInCart = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//td//a[contains(text(),'Borcan 106 ml Amfora')]")));
         Assert.assertTrue(productInCart.isDisplayed(), "Produsul NU este prezent in cos");
@@ -82,6 +86,6 @@ public class ProductFlowTest extends Hooks {
         Assert.assertTrue(true, "Produsul a fost eliminat cu succes");
 
         // mesaj in consolă
-        System.out.println("Flow-ul de test al produsului s-a incheiat cu succes");
+        LoggerUtil.infoLog("Product flow completed successfully");
     }
 }

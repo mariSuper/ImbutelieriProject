@@ -2,6 +2,7 @@ package imbutelieriTests;
 
 import imbutHooks.Hooks;
 import imbutModels.UserModel;
+import imbutPages.LoginPageImbut;
 import imbutUtils.JsonUtils;
 import imbutUtils.LoggerUtil;
 import org.openqa.selenium.By;
@@ -11,32 +12,30 @@ import org.testng.annotations.Test;
 
 public class LoginPageTest extends Hooks {
 
-    @Test
+    @Test(groups = {SuiteType.SMOKE, SuiteType.LOGIN})
     public void loginValidUser() {
         LoggerUtil.infoLog("Loading user data from JSON");
         UserModel user = JsonUtils.getTestData().getValidUser();
         acceptCookiesIfPresent();
 
+        LoginPageImbut loginPage = new LoginPageImbut(driver);
+
         // Click pe Menu "Contul meu"
-        LoggerUtil.infoLog("Click on Contul Meu");
         WebElement contulMeu = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//span[text()='Contul meu']")));
         contulMeu.click();
 
         // Completare in field 'Email'
-        LoggerUtil.infoLog("Typing email");
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.id("input-email")));
         emailField.sendKeys(user.getEmail());
 
         // Completare in field 'Password'
-        LoggerUtil.infoLog("Typing password");
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.id("input-password")));
         passwordField.sendKeys(user.getPassword());
 
         // Click pe butonul 'Autentificare'
-        LoggerUtil.infoLog("Click on Login");
         WebElement loginBtn = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//input[@value='Autentificare']")));
         loginBtn.click();

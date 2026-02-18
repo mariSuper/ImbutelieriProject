@@ -2,7 +2,7 @@
 
 <suite name="ImbutelieriSuite">
 
-    <test name="SmokeTests">
+    <test name="All Tests">
         <packages>
             <package name="imbutelieriTests"/>
         </packages>
