@@ -6,7 +6,13 @@ on:
       suiteName:
         description: "Please specify suite: SmokeSuite, LoginSuite, ProductSuite, RegressionSuite"
         required: true
-        default: "SmokeSuite"
+        type: choice
+        options:
+          - SmokeSuite
+          - RegressionSuite
+          - LoginSuite
+          - ProductSuite
+        default: SmokeSuite
 
 jobs:
   build:
