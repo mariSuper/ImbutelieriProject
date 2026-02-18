@@ -14,6 +14,7 @@ public class LoginPageTest extends Hooks {
 
     @Test(groups = {SuiteType.SMOKE, SuiteType.LOGIN})
     public void loginValidUser() {
+
         LoggerUtil.infoLog("Loading user data from JSON");
         UserModel user = JsonUtils.getTestData().getValidUser();
         acceptCookiesIfPresent();
