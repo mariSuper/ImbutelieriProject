@@ -8,11 +8,11 @@ on:
         required: true
         type: choice
         options:
-          - SmokeSuite
-          - RegressionSuite
-          - LoginSuite
-          - ProductSuite
-        default: SmokeSuite
+          - SMOKE
+          - REGRESSION
+          - LOGIN
+          - PRODUCT
+        default: SMOKE
 
 jobs:
   build:
@@ -33,4 +33,4 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run automation tests
-        run: mvn clean install -Dgroups=${{github.event.inputs.suiteName}}
+        run: mvn clean install -Dgroups=${{github.event.inputs.suiteName}} -Dheadless=true

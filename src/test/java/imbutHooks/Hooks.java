@@ -23,12 +23,17 @@ public class Hooks {
         testName = this.getClass().getSimpleName();
 
         // CRITIC în CI
-        ChromeOptions options = new ChromeOptions();
-        if (System.getProperty("headless") != null) {
+        ChromeOptions options = new ChromeOptions();   // ← ASTA LIPSEA
+
+        boolean isHeadless = Boolean.parseBoolean(
+                System.getProperty("headless", "false"));
+
+        if (isHeadless) {
             options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
         }
+
         driver = new ChromeDriver(options);
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));

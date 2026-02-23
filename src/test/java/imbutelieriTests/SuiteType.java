@@ -2,8 +2,8 @@ package imbutelieriTests;
 
 public class SuiteType {
 
-    public static final String SMOKE = "SmokeSuite";
-    public static final String LOGIN = "LoginSuite";
-    public static final String PRODUCT = "ProductSuite";
-    public static final String REGRESSION = "RegressionSuite";
+    public static final String SMOKE = "SMOKE";
+    public static final String LOGIN = "LOGIN";
+    public static final String PRODUCT = "PRODUCT";
+    public static final String REGRESSION = "REGRESSION";
 }
