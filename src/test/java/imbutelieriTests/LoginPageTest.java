@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 public class LoginPageTest extends Hooks {
 
-    @Test(groups = {SuiteType.SMOKE, SuiteType.LOGIN})
+    @Test(groups = {SuiteType.SMOKE, SuiteType.LOGIN, SuiteType.REGRESSION})
     public void loginValidUser() {
 
         LoggerUtil.infoLog("Loading user data from JSON");

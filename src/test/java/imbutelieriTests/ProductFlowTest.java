@@ -13,7 +13,7 @@ import imbutUtils.JsonUtils;
 
 public class ProductFlowTest extends Hooks {
 
-    @Test(groups = {SuiteType.SMOKE, SuiteType.PRODUCT})
+    @Test(groups = {SuiteType.SMOKE, SuiteType.PRODUCT, SuiteType.REGRESSION})
     public void addProductToCartFlow() {
         ProductModel product = JsonUtils.getTestData().getProductData();
         acceptCookiesIfPresent();
