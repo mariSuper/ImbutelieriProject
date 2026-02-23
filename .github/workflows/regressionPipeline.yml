@@ -19,4 +19,4 @@ jobs:
           cache: maven
 
       - name: Run regression tests
-        run: mvn clean install -Dgroups=RegressionSuite
+        run: mvn clean install -Dgroups=REGRESSION

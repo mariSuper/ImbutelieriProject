@@ -21,6 +21,7 @@ public class Hooks {
     @BeforeMethod
     public void setup(){
         testName = this.getClass().getSimpleName();
+        System.out.println("SETUP RUNNING !!!");
 
         // CRITIC în CI
         ChromeOptions options = new ChromeOptions();
