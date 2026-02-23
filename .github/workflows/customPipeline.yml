@@ -32,5 +32,8 @@ jobs:
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1
 
+      - name: Setup ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+
       - name: Run automation tests
         run: mvn clean install -Dgroups=${{github.event.inputs.suiteName}} -Dheadless=true

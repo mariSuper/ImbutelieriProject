@@ -23,11 +23,9 @@ public class Hooks {
         testName = this.getClass().getSimpleName();
 
         // CRITIC în CI
-        ChromeOptions options = new ChromeOptions();   // ← ASTA LIPSEA
-
+        ChromeOptions options = new ChromeOptions();
         boolean isHeadless = Boolean.parseBoolean(
                 System.getProperty("headless", "false"));
-
         if (isHeadless) {
             options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
@@ -46,6 +44,7 @@ public class Hooks {
         // Logger pornire test automat
         LoggerUtil.startTest(testName);
     }
+
     // Metodă helper
     protected void acceptCookiesIfPresent(){
         try {
