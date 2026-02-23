@@ -18,7 +18,7 @@ public class Hooks {
     protected WebDriverWait wait;
     protected String testName;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup(){
         testName = this.getClass().getSimpleName();
         System.out.println("SETUP RUNNING !!!");
