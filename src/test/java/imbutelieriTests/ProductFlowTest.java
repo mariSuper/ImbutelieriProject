@@ -21,6 +21,10 @@ public class ProductFlowTest extends Hooks {
         // Click pe Menu 'Categorii'
         WebElement categoriiElement = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//div[contains(@class,'left')]//*[contains(text(),'Categorii')]")));
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView(true);", categoriiElement);
+
+        wait.until(ExpectedConditions.elementToBeClickable(categoriiElement));
         categoriiElement.click();
 
         // Click pe Submenu 'Borcane'
