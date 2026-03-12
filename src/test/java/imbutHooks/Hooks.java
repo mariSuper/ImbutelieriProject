@@ -25,10 +25,13 @@ public class Hooks {
 
         // CRITIC în CI
         ChromeOptions options = new ChromeOptions();
+
         boolean isHeadless = Boolean.parseBoolean(
                 System.getProperty("headless", "false"));
+
         if (isHeadless) {
             options.addArguments("--headless=new");
+            options.addArguments("--window-size=1920,1080");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
         }
@@ -41,6 +44,9 @@ public class Hooks {
 
         // Homepage
         driver.get("https://www.imbutelieri.ro/");
+
+        // accept cookie banner daca apare
+        acceptCookiesIfPresent();
 
         // Logger pornire test automat
         LoggerUtil.startTest(testName);
