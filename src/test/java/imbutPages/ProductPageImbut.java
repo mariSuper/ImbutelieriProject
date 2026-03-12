@@ -19,7 +19,7 @@ public class ProductPageImbut {
 
     // Elemente
     // Meniul 'CATEGORII'
-    @FindBy(xpath = "//div[contains(@class,'left')]//span[contains(text(),'Categorii')]")
+    @FindBy(xpath = "//div[contains(@class,'left')]//*[contains(text(),'Categorii')]")
     private WebElement categoriiElement;
 
     // Submeniul 'Borcane'
